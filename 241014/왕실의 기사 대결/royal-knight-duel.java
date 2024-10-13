@@ -86,7 +86,7 @@ public class Main {
 				affectedKnight = new ArrayList<>();
 				moveKnight(i, d);
 				for (Integer k : affectedKnight) {
-					if (!knights[k].out) // 아직 맵에 있고, 명령을 받은 기사가 아닌 다른 기사들의 대미지 계산
+					if (!knights[k].out) // 아직 맵에 있고, 명령에 의해 밀쳐진 기사들의 대미지 계산
 						calcDamage(k);
 				}
 			}
@@ -170,7 +170,7 @@ public class Main {
 	}
 
 	public static void calcDamage(int k) {
-		// 기사의 현재 위치에서 w x h 내에 놓여있는 함정 수만큼 대미지, 기사의 위치는 방패 크기를 포함
+		// 기사의 현재 위치에서 w x h 내에 놓여있는 함정 수만큼 대미지
 		int startR = knights[k].r;
 		int startC = knights[k].c;
 
@@ -184,7 +184,7 @@ public class Main {
 
 		// 현재 체력 이상의 대미지를 받는 경우 맵에서 사라지게 됨
 		knights[k].damage += d;
-		if (knights[k].k - knights[k].damage < 0)
+		if (knights[k].k - knights[k].damage <= 0)
 			knights[k].out = true;
 
 		return;
